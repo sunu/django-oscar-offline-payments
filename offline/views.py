@@ -208,5 +208,5 @@ class SuccessResponseView(PaymentDetailsView):
                         amount_debited=txn.amount,
                         reference=txn.txnid)
         self.add_payment_source(source)
-        self.add_payment_event('Iniated', txn.amount,
+        self.add_payment_event('Initiated', txn.amount,
                                reference=txn.txnid)

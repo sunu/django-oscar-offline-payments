@@ -41,4 +41,11 @@
             <tr><th>{% trans "Date" %}</th><td>{{ txn.date_created }}</td></tr>
         </tbody>
     </table>
+    <hr>
+    <h2>Change Transaction Status</h2>
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input class="btn btn-primary" type="submit" value="Submit" />
+    </form>
 {% endblock dashboard_content %}
