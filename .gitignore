@@ -1,0 +1,29 @@
+*.sw[po]
+*.py[oc]
+.DS_Store
+.cache/
+
+# Packaging
+dist
+build/
+*.egg-info/
+docs/_build
+
+# Testing
+htmlcov
+.tox
+.coverage
+.coveralls.yml
+
+# Database
+sandbox/db.sqlite
+
+# Sensitive data
+TODO
+integration.py
+
+# Sandbox
+sandbox/public/media
+
+# Virtualenv
+venv

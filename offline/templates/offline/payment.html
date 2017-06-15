@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Payment with Offline Payment</title>
+</head>
+<body>
+<script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+<script>
+    // Todo: show payment details
+    var url = "{% url 'offline-success-response' basket_id=basket.id %}";
+    var params = {
+        'txn_id': "{{ txn_id }}"
+    };
+    window.location = url + "?" + $.param(params);
+</script>
+</body>
+</html>

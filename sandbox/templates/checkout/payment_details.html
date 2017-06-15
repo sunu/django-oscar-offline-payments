@@ -1,0 +1,12 @@
+{% extends 'oscar/checkout/payment_details.html' %}
+{% load i18n %}
+
+{% block payment_details %}
+    <div class="well">
+        <div class="sub-header">
+            <h3>{% trans "Offline Payment" %}</h3>
+        </div>
+        <p>{% trans "Click on the below icon to pay using offline payment but where the shipping address and method is already chosen on the merchant site." %}</p>
+        <div style="overflow:auto"><a href="{% url 'offline-direct-payment' %}?payment_method=DD" title="{% trans "Pay with DD" %}">DD payment</a>&nbsp;</div>
+    </div>
+{% endblock %}
