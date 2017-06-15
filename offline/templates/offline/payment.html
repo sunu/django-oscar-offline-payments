@@ -1,20 +1,48 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Payment with Offline Payment</title>
-</head>
-<body>
-<script
-  src="https://code.jquery.com/jquery-3.2.1.min.js"
-  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-  crossorigin="anonymous"></script>
-<script>
-    // Todo: show payment details
-    var url = "{% url 'offline-success-response' basket_id=basket.id %}";
-    var params = {
-        'txn_id': "{{ txn_id }}"
-    };
-    window.location = url + "?" + $.param(params);
-</script>
-</body>
-</html>
+{% extends 'layout.html' %}
+{% block title %}Payment with Offline Payment{% endblock %}
+
+{% block layout %}
+    <div class="container-fluid page">
+        <div class="row">
+            {% if payment_method == "ET" %}
+                <p>For electronic transfer, use the following account details:</p>
+                <p><b>Bank: {{etrans_details.bank}}</b>
+                <br /><b>Branch: {{etrans_details.bank_branch}}</b>
+                <br /><b>Bank NEFT Code: {{etrans_details.bank_neft}}</b>
+                <br /><b>A/C Holder's Name: {{etrans_details.ac_name}}</b>
+                <br /><b>A/C Number: {{etrans_details.ac_number}}</b>
+                <br /><b>A/C Type: {{etrans_details.ac_type}}</b>
+            {% else%}
+                Cheques/demand drafts/money orders should be made out to:
+                <p><strong>{{store.official_name}}</strong></p>
+                <p>and sent to the following address:</p>
+                <address>
+                    {{store.name}}<br/>
+                    {{store.street1}}<br/>
+                    {{store.street2}}<br/>
+                    {{store.city}}<br/>
+                    {{store.state}}<br/>
+                    {{store.country}}<br/>
+                    {{store.postalcode}}<br/>
+                </address>
+            {% endif %}
+        </div>
+        <button id="place-order" class="btn btn-primary">Submit Order</button>
+        <button id="cancel">Cancel</button>
+    </div>
+{% endblock %}
+{% block onbodyload %}
+    {{ block.super }}
+    $("#place-order").on("click", function(){
+        var url = "{% url 'offline-success-response' basket_id=basket.id %}";
+        var params = {
+            'txn_id': "{{ txn_id }}"
+        };
+        window.location = url + "?" + $.param(params);
+    });
+
+    $("#cancel").on("click", function(){
+        var url = "{% url 'offline-cancel-response' basket_id=basket.id %}";
+        window.location = url;
+    });
+{% endblock %}

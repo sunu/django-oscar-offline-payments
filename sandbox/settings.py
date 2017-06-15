@@ -227,6 +227,26 @@ HAYSTACK_CONNECTIONS = {
     },
 }
 
+OFFLINE_ETRANS_DETAILS = {
+    "bank": "My Bank",
+    "bank_branch": "My branch",
+    "bank_neft": "1234meft",
+    "ac_name": "1234567890",
+    "ac_type": "savings"
+}
+
+OFFLINE_STORE = {
+    "official_name": "Mudranik Technologies",
+    "name": "Mudranik technologies",
+    "street1": "#634",
+    "street2": "5th main, Indiranagar",
+    "city": "Bengaluru",
+    "state": "Karnataka",
+    "country": "India",
+    "postalcode": "700100"
+}
+
+
 # Put your own sandbox settings into an integration.py modulde (that is ignored
 # by git).
 try:

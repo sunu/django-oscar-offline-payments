@@ -101,7 +101,9 @@ class PaymentView(CheckoutSessionMixin, View):
             "basket": basket,
             "amount": int(amount),
             "txn_id": txn.txnid,
-            "payment_method": self.payment_method
+            "payment_method": self.payment_method,
+            "store": settings.OFFLINE_STORE,
+            "etrans_details": settings.OFFLINE_ETRANS_DETAILS
         }
         return context
 
