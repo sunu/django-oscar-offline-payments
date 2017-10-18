@@ -3,14 +3,13 @@ import logging
 
 from django.views.generic import RedirectView, View
 from django.conf import settings
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, redirect
 from django.contrib import messages
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.utils import six
 from django.utils.translation import ugettext_lazy as _
 
-from oscar.apps.payment.exceptions import UnableToTakePayment
 from oscar.core.loading import get_class, get_model
 
 from . import facade
@@ -78,7 +77,11 @@ class PaymentView(CheckoutSessionMixin, View):
 
             logger.info("Starting payment for basket #%s", basket.id)
             context = self._start_offline_txn(basket)
-            return render(request, self.template_name, context)
+            response = redirect(
+                'offline-success-response', basket_id=context["basket"].id
+            )
+            response['Location'] += '?txn_id={0}'.format(context["txn_id"])
+            return response
 
     def _start_offline_txn(self, basket, **kwargs):
         """
